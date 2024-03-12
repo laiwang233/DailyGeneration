@@ -1,14 +1,12 @@
 ﻿using Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 namespace EntityFrameworkCore
 {
-    public class TodoDbContext : DbContext
+    public class TodoDbContext : IdentityDbContext<User, Role, string>
     {
-        public DbSet<Todo> Todos { get; set; }
-
-        public DbSet<User> Users { get; set; }
-
         public TodoDbContext(DbContextOptions<TodoDbContext> options) : base(options)
         {
             
@@ -19,6 +17,14 @@ namespace EntityFrameworkCore
             optionsBuilder.EnableSensitiveDataLogging();
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) => modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+        protected override async void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //这行是必要的，因为方法内包含了User和Role的实体配置
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+
+            modelBuilder.Entity<Role>().HasData(new Role { Name = "Admin", NormalizedName = "ADMIN" });
+        }
     }
 }

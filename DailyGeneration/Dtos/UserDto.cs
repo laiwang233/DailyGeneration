@@ -1,19 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Entities;
 
-namespace Entities;
+namespace DailyGeneration.Dtos;
 
-/// <summary>
-/// 用户
-/// </summary>
-public class User : IdentityUser
+public class UserDto
 {
     /// <summary>
-    /// 名称
+    /// 用户名
     /// </summary>
     public string Name { get; set; }
 
     /// <summary>
-    /// 登录账号
+    ///登录账号
     /// </summary>
     public string Account { get; set; }
 

@@ -1,8 +1,7 @@
 ﻿using Application.Apps;
 using Application.Dtos;
-using Entities;
 using Microsoft.AspNetCore.Mvc;
-using Repository;
+using System.Net.Http.Headers;
 
 namespace DailyGeneration.Controllers
 {
@@ -22,5 +21,6 @@ namespace DailyGeneration.Controllers
 
         [HttpPost]
         public async Task<TodoDto> Add(TodoDto todoDto) => await _todoApplication.AddAsync(todoDto);
+
     }
 }
