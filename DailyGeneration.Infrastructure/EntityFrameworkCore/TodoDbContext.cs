@@ -20,7 +20,7 @@ namespace DailyGeneration.Infrastructure.EntityFrameworkCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //这行是必要的，因为方法内包含了User和Role的实体配置
+            //这行是必要的，因为方法内包含了Identity的User和Role的实体配置
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
